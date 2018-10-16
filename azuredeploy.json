@@ -14,13 +14,6 @@
       "metadata": {
         "description": "The location to use for creating the function app and hosting plan. It must be one of the Azure locations that support function apps."
       }
-    },
-    "queueName": {
-      "type": "string",
-      "defaultValue": "posted",
-      "metadata": {
-        "description": "Name of queue to populate."
-      }
     }
   },
   "variables": {
@@ -95,23 +88,6 @@
       "properties": {
         "accountType": "Standard_LRS"
       }
-    },
-    {
-      "apiVersion": "[variables('sbVersion')]",
-      "name": "[variables('serviceBusNamespaceName')]",
-      "type": "Microsoft.ServiceBus/namespaces",
-      "location": "[resourceGroup().location]",
-      "properties": {},
-      "resources": [
-        {
-          "apiVersion": "[variables('sbVersion')]",
-          "name": "[parameters('queueName')]",
-          "type": "Queues",
-          "dependsOn": [
-            "[concat('Microsoft.ServiceBus/namespaces/', variables('serviceBusNamespaceName'))]"
-          ]
-        }
-      ]
     }
   ],
   "outputs": {
